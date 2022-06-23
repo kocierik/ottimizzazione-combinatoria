@@ -1,0 +1,1196 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsfonts}
+\usepackage{enumerate}
+\usepackage[italian]{babel}
+\usepackage[hidelinks]{hyperref}
+\usepackage[bottom]{footmisc}
+
+\usepackage{etoolbox}
+\AtBeginEnvironment{align}{\setcounter{equation}{0}}
+\AtBeginEnvironment{alignat}{\setcounter{equation}{0}}
+
+\title{Programmazione Lineare}
+\author{Luca Tagliavini
+  \thanks{Correzioni: Stefano Volpe, Matteo Manuelli, Andreea Scrob, Paolo Ceroni}
+}
+
+\setcounter{secnumdepth}{0}
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+\pagebreak
+\tableofcontents
+\pagebreak
+\pagenumbering{arabic}
+
+\section{Esercizio 1.19}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_i = \begin{cases}
+    1 &\text{se il ragazzo }i\text{ \`e nella squadra A}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_j = \begin{cases}
+    1 &\text{se la ragazza }j\text{ \`e nella squadra A}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad |(\sum_{i=1}^n x_i a_i + \sum_{j=1}^m y_j b_j) - (\sum_{i=1}^n (1-x_i) a_i + \sum_{j=1}^m (1-y_j) b_j)|
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{1}
+  \sum_{i=1}^n x_i \sum_{j=1}^m y_j &= k \\
+  x_i, y_j \in \{0,1\} \qquad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.20}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di kilogrammi del mangime }i\text{ acquistati}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n x_i c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n 1000 x_i p_i &\geq 170 &\forall i \in \{1,\ldots,n\}\\
+  \sum_{i=1}^n 1000 x_i g_i &\leq 200 &\forall i \in \{1,\ldots,n\}\\
+  \sum_{i=1}^n x_i a_i &\leq 1100 &\forall i \in \{1,\ldots,n\}\\
+  x_i &\in \mathbb{R} \qquad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.21}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,3\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di pezzi del modello }i\text{ prodotti}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^3 x_i a_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^3 x_i m_i &\leq n &\forall i \in \{1,\ldots,3\}\\
+  \sum_{i=1}^3 x_i o_i &\leq s &\forall i \in \{1,\ldots,3\}\\
+  \sum_{i=1}^3 x_i g_i &\leq p &\forall i \in \{1,\ldots,3\}\\
+  x_i &\leq \frac{\sum_{j=1}^3 x_i}{2} \quad &\forall i \in \{1,\ldots,3\}\\
+  x_i &\in \mathbb{N} \quad &\forall i \in \{1,\ldots,3\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.22}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $y_i = \begin{cases}
+      1 & \text{se almeno un aereo dell'}i\text{-esimo modello viene acquistato} \\
+      0 & \text{altrimenti}
+  \end{cases}$
+  \item $x_i = \text{numero di aerei dell'}i\text{-esimo modello acquistati}$
+  \item $h_{i,j} = \begin{cases}
+      1 & \text{se il }j\text{-esimo volo viene svolto da} \\
+      & \text{un aereo dell'}i\text{-esimo modello} \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n y_i x_i c_i + y_i t_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  M &= m &\text{(numero di voli)} \\
+  x_i &\leq M y_i &\forall i \in \{1,\ldots,n\} \\
+  x_i &\geq y_i &\forall i \in \{1,\ldots,n\} \\
+  h_{i,j} &\leq y_i &\forall i \in \{1,\ldots,n\} \forall j \in \{1,\ldots,m\} \\
+  \sum_{j=1}^m h_{i,j} &\leq v x_i &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n h_{i,j} &= 1 &\forall j \in \{1,\ldots,m\} \\
+  \sum_{i=1}^n h_{i,j} a_i &\geq d_j &\forall j \in \{1,\ldots,m\} \\
+  x_i &\in \mathbb{N}, y_i \in \{0,1\} &\forall i \in \{1,\ldots,n\} \\
+  h_{i,j} &\in \{0,1\} &\forall i \in \{1,\ldots,n\} \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.23}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,\frac{m}\}$)
+
+\begin{itemize}
+  \item $m = \frac{n}{5}$
+  \item $y_{i,j} = \begin{cases}
+      1 & \text{se }s_i = j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se lo studente }i\text{ \`e nel gruppo }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m \sum_{i=1}^n x_{i,j} y_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n x_{i,j} &= 5 \quad &\forall j \in \{1,\ldots,m\}\\
+  24 \leq \sum_{j=1}^m &\frac{\frac{\sum_{i=1}^n x_{i,j} m_i}{5}}{m} \leq 28 \\
+  x_{i,j}, y_{i,j} &\in \{0, 1\} \quad&\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.24}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se collego il pozzo }i\text{ con la raffineria }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m \sum_{i=1}^n x_{i,j} c_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &\geq 1 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{j=1}^m x_{i,j} a_{i,j} &\geq p_i &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} a_{i,j} &\leq r_j &\forall j \in \{1,\ldots,m\} \\
+  x_{i,j} &\in \{0,1\} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.25}
+
+\paragraph{Variabili} ($(i,j) \in E$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se l'arco }(i,j)\text{ \`e incluso nella soluzione} \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{(i,j) \in E} x_{i,j} c_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  &\sum_{(s,d) \in E} x_{s,d} = 1 \qquad&\sum_{(o, t) \in E} x_{o,t} = 1 \\
+  \sum_{(i,d) \in E} x_{i,d} &= \sum_{(o,i) \in E} x_{o,i} \qquad&\forall i \in E \setminus \{s,t\}\\
+  x_{i,j} &\in \{0,1\} &\forall (i,j) \in E
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.26}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se comprimo il documento }i\text{ con il programma }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+  \item $y_j = \begin{cases}
+      1 & \text{se acquisto il programma }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m y_j p_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_{i,j} \leq y_j &\geq 1 &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} &\geq y_j &\forall j \in \{1,\ldots,m\} \\
+  \sum_{j=1}^m x_{i,j} &=1  &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} &=1  &\forall j \in \{1,\ldots,m\} \\
+  &&\sum_{j=1}^m y_j d_j + \sum_{i=1}^n\sum_{j=1}^m x_{i,j} c_{i,j} s_i \leq 650 \cdot 1000 \\
+  x_{i,j} &\in \{0,1\}, y_j \in \{0,1\} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.27}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se metto l'oggetto }i\text{ nello scatolone }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+  \item $y_j = \begin{cases}
+      1 & \text{se uso il }j\text{-esimo scatolone} \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m y_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_{i,j} \leq y_j &\geq 1 &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} &\geq y_j &\forall j \in \{1,\ldots,m\} \\
+  \sum_{j=1}^m x_{i,j} &=1  &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} p_i &\leq c_j  &\forall j \in \{1,\ldots,m\} \\
+  x_{i,j}, y_j \in \{0,1\} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.28}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $v_{i,j} = \begin{cases}
+      1 & \text{se }j \in d_i \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}$)
+\begin{itemize}
+  \item $x_i = \begin{cases}
+      1 & \text{se dovr\`o frequentare il corso }i\\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n x_i c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_i &= 1 &\forall i \in I \\
+  \sum_{i=1}^n x_i c_i &= 120 &\\
+  x_i &\geq v_{i,j} &\forall i \in I, j \in \{1,\ldots,n\} \\
+  \frac{\sum_{i=1}^n x_i t_i}{\sum_{i=1}^n x_i} &\leq k & \\
+  x_i, v_{i,j} &\in \{0,1\} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.29}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,m\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se la stampante }i \text{ viene data al reparto }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n c_i (\sum_{j=1}^m x_{i,j})
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^n x_{i,j} &\leq 1 &\forall i \in \{1,\ldots,m\} \\
+  \sum_{i=1}^m x_{i,j} f_i &\geq r_j &\forall j \in \{1,\ldots,n\} \\
+  \sum_{i=1}^m x_{i,j} &\leq 5 &\forall j \in \{1,\ldots,n\} \\
+  x_{i,j} &\in \{0,1\} &\forall i \in \{1,\ldots,m\}, j \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.30}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 & \text{se mi muovo dall'attrazione }i\text{ all'attrazione }j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^n x_{i,j} l_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  &\sum_{d=1}^n x_{s,d} = 1 &\sum_{o=1}^n x_{o,t} = 1 \\
+  \sum_{d=1}^n x_{i,d} &= \sum_{o=1}^n x_{o,i} &\forall i \in \{1,\ldots,n\}\\
+  x_{i,j} &\in \{0,1\} &\forall i\in \{1,\ldots,n\}, j \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.31}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di pacchi di pasta del tipo }i$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n x_i c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{1}
+  \sum_{i=1}^n x_i p_i &\geq 1000k \\
+  \sum_{i=1}^n x_i p_i g_i &\geq 10r \\
+  \sum_{i=1}^n x_i p_i q_i &\geq 10b \\
+  x_i \in \mathbb{N} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.32}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di GB allocati al provider }i$
+  \item $y_i = \begin{cases}
+      1 & \text{se }x_i > 0 \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n x_i c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_i &\leq y_i t &\forall i \in \{1,\ldots,n\} \\
+  x_i &\geq y_i &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_i &\geq 1000t & \\
+  \frac{\sum_{i=1}^n y_i d_i}{\sum_{i=1}^n y_i} &\geq v \quad 
+  &\frac{\sum_{i=1}^n y_i u_i}{\sum_{i=1}^n y_i} \geq v &\\
+  x_i &\in \mathbb{N}, y_i \in \{0, 1\} &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.33}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}$)
+\begin{itemize}
+  \item $x_i = \text{km percorsi dal camion }i$
+  \item $y_i = \begin{cases}
+    1 & \text{se }x_i \leq k_i \\
+    0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n y_i c_i + (i-y_i) d_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n x_i &\geq 1000000 \quad & \\
+  x_i &\leq y_i k_i + m_i(1-y_i) &\forall i \in \{1,\ldots,n\} \\
+  x_i &\geq k_i(1-y_i)  &\forall i \in \{1,\ldots,n\} \\
+  x_i &\leq m_i &\forall i \in \{1,\ldots,n\} \\
+  x_i &\in \mathbb{N}, y_i \in \{0,1\} \quad &\forall i \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.34}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se il candidato }i\text{ viene assunto per il team }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &\leq 1 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} &\geq t_j &\forall j \in \{1,\ldots,m\} \\
+  \sum_{i \in D} x_{i,j} &\geq \frac{30}{100} \sum_{i=1}^n x_{i,j} &\forall j \in \{1,\ldots,m\} \\
+  \frac{\sum_{i=1}^n x_{i,j}e_i}{\sum_{i=1}^n} x_{i,j} &\geq 40 &\forall j \in \{1,\ldots,m\} \\
+  x_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,m\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.35}
+
+\paragraph{Variabili} ($(i,j) \in E$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se il commesso viaggiatore sfrutta l'arco }(i,j)\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n \sum_{j=1}^n x_{i,j} c_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j \in V \setminus \{i\}} x_{i,j} &= 2 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{(i,j) \in E(V', V'')} x_{i,j} &\geq 1 &\forall (V', V'') \in (V, E) \\
+  x_{i,j} &\in \{0,1\} \quad &\forall i,j \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.36}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $y_i = \begin{cases}
+      1 & \text{se }e_i \geq 2 \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di macchine dell'azienda }i\text{ acquistate}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^m x_i p_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{1}
+  \sum_{i=1}^m x_i &= n \\
+  \sum_{i=1}^m x_i y_i &\geq n-k \\
+  \sum_{i=1}^m x_i d_i &\geq c \\
+  x_i \in \mathbb{N} \quad &\forall i \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.37}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}, o \in \{1,\ldots,k\}$)
+\begin{itemize}
+  \item $y_{i,j} = \begin{cases}
+      1 & \text{se }i \in D_j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+  \item $h_{i,o} = \begin{cases}
+      1 & \text{se }a_j = o \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($j \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_j = \begin{cases}
+      1 & \text{se acquisto il software }j\\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m x_j c_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_j y_{i,j} &= n &\forall i \in \{1,\ldots,n\}\\
+  x_j, y_{i,j}, h_{j,o} &\in \{1,0\} \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}, k \in \{1,\ldots,k\}
+\end{alignat}
+
+\paragraph{Variabili (variante)} ($o \in \{1,\ldots\,k\}$)
+\begin{itemize}
+  \item \textbf{variante} $y_o = \begin{cases}
+      1 & \text{se ho diritto allo sconto dall'azienda }o \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{j=1}^m x_j c_j - \sum_{o=1}^k y_o s_o
+\end{align*}
+
+\paragraph{Vincoli (variante)}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_j h_{j,o} &\geq y_o s_o \quad &\forall o \in \{1,\ldots,k\} \\
+  \sum_{j=1}^m x_j h_{j,o} &< y_oM + s_o \quad &\forall o \in \{1,\ldots,k\} \\
+  M &= m &
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.38}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n^2\}, g \in \{1,\ldots,7\}$)
+\begin{itemize}
+  \item $l_{i,g} = \begin{cases}
+      1 & \text{se }g_i \neq g \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n^2\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se alloco il dipendente }i\text{ nello stabilimento }j \\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^{n^2} \sum_{j=1}^n x_{i,j} d_{c_i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^n x_{i,j} &= 1 &\forall i \in \{1,\ldots,n^2\} \\
+  \sum_{i=1}^{n^2} x_{i,j} &= n &\forall j \in \{1,\ldots,n\} \\
+  \sum_{i=1}^{n^2} x_{i,j} l_{i,g} &\geq p &\forall j \in \{1,\ldots,n\}, g \in \{1,\ldots,7\}
+\end{alignat}
+\begin{align}
+  \setcounter{equation}{3}
+  x_{i,j}, l_{i,g} \in \{0,1\} \quad &\forall i \in \{1,\ldots,n^2\}, \\
+  \nonumber  &\forall j \in \{1,\ldots,n\}, \forall g \in \{1,\ldots,7\}
+\end{align}
+
+\pagebreak
+\section{Esercizio 1.39}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se compilo il progetto }i\text{ sulla macchina }j \\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $t = \text{stima per eccesso del tempo necessario}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad t
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &= 1 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} t_{i,j} &\leq t &\forall j \in \{1,\ldots,m\} \\
+  x_{i,j} \in \{0,1\}, &t \in \mathbb{N} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.40}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se }i \in d_j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $z_{i,j} = \begin{cases}
+    1 &\text{se }i \in b_j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($j \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_j = \begin{cases}
+    1 &\text{se assumo il candidato }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^m x_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_j y_{i,j} &\geq 5 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{j=1}^m x_j z_{i,j} &\geq 3 &\forall i \in \{1,\ldots,n\} \\
+  x_j, y_{i,j}, z_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.41}
+
+\paragraph{Variabili} ($i,j \in \{1,\ldots\,n\}, t \in \{1,\ldots,m^{i,j}\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se prendo il treno da }i\text{ a }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_{i,j,t} = \begin{cases}
+    1 &\text{se prendo il viaggio }(i,j)\text{ alle }p_{i,j}^{t}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{o=1}^n \sum_{t=1}^{m^{i,j}} y_{o,h,t} a_{o,h}^t
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  &\sum_{d=1}^n x_{k,d} = 1 &\sum_{o=1}^n x_{o,h} = 1\\
+  \sum_{d=1}^n x_{i,d} &= \sum_{o=1}^n x_{o,i} &\forall i \in \{1,\ldots,n\} \setminus \{h,k\}\\
+  \sum_{j=1}^n x_{i,j} + x_{j,i} &\leq 2 &\forall i \in \{1,\ldots,n\}\\
+  \sum_{t=1}^{m^{i,j}} y_{i,j,t} &= x_{i,j} &\forall i,j \in \{1,\ldots,n\}\\
+  \sum_{t=1}^{m^{i,j}} y_{i,j,t} &\leq 1 &\forall i,j \in \{0,\ldots,n\}\\
+  \sum_{o=1}^n \sum_{t=1}^{m^{o,i}} y_{o,i,t} a_{o,i}^t &\leq \sum_{d=1}^n \sum_{t=1}^{m^{i,d}} y_{i,d,t} p_{i,d}^t &\forall i \in \{1,\ldots,n\}\\
+  x_{i,j}, y_{i,j,t} &\in \{0,1\} \quad &\forall i,j \in \{1,\ldots,n\}, \forall t \in \{1,\ldots,m^{i,j}\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.42}
+
+\paragraph{Variabili} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+      1 &\text{se assegno il dipendente }i\text{ al progetto }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} a_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &\leq k &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} &\geq p &\forall j \in \{1,\ldots,m\} \\
+  x_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.43}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $c_{i,j} = \begin{cases}
+    1 &\text{se }i \in c_j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se assegno il lavoro }i\text{ alla squadra }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} g_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &= 1 &\forall i \in \{1,\ldots,n\} \\
+  x_{i,j} &\leq c_{i,j} &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\} \\
+  x_{i,j}, c_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} g_{i,j} o_j s_j
+\end{align*}
+
+\pagebreak
+\section{Esercizio 1.44}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $c_{i,j} = \begin{cases}
+    1 &\text{se }i \in p_j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots\,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se assegno il candidato }i\text{ alla squadra }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_i = \begin{cases}
+      1 &\text{se assumo il candidato}i\\
+      0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n y_i c_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &\leq k &\forall i \in \{1,\ldots,n\} \\
+  y_i &\leq \sum_{j=1}^m &\forall i \in \{1,\ldots,n\} \\
+  \sum_{j=1}^m x_{i,j} &\leq yM &\forall i \in \{1,\ldots,n\} \\
+  x_{i,j} &\leq c_{i,j} &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\} \\
+  x_{i,j}, y_i c_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,m\}
+\end{alignat}
+\begin{align}
+  \setcounter{equation}{5}
+  M &= k \qquad\text{(questa scelta rende superfluo il vincolo 1)}
+\end{align}
+
+\pagebreak
+\section{Esercizio 1.45}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,k\}$)
+\begin{itemize}
+  \item $u_{i,j} = \begin{cases}
+    1 &\text{se }g_i = j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_i = \begin{cases}
+    1 &\text{se scelgo la canzone }i\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \frac{\sum_{i=1}^n x_i v_i}{m}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n x_i &= m &\\
+  \sum_{i=1}^n x_i u_{i,j} &\geq 1 &\forall j \in \{1,\ldots,k\}\\
+  x_i, u_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,k\}
+\end{alignat}
+
+\paragraph{Variabili (variante)} ($i \in \{1,\ldots,n\}, l \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $y_{i,l} = \begin{cases}
+    1 &\text{se inserisco la canzone }i\text{ in posizione }l\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Vincoli (variante)}
+\begin{alignat}{2}
+  \setcounter{equation}{3}
+  \sum_{i=1}^n y_{i,l} &= 1 \quad\text{(pedante)} &\forall l \in \{1,\ldots,m\}\\
+  \sum_{l=1}^m y_{i,l} &\leq 1 &\forall i \in \{1,\ldots,n\}\\
+  x_i &\geq y_{i,l} &\forall i \in \{1,\ldots,n\}, \forall l \in \{1,\ldots,m\}\\
+  x_i &\leq \sum_{l=1}^m y_{i,l} &\forall i \in \{1,\ldots,n\}\\
+  |\sum_{i=1}^n y_{i,l-1} g_i - \sum_{i=1}^n y_{i,l}y_i| &> 0 &\forall l \in \{2,\ldots,m\}\\
+  \frac{\sum_{i=1}^n x_i u_{i,j} v_i}{\sum_{i=1}^n x_i u_{i,j}} &\geq q &\forall j \in \{1,\ldots,k\}\\
+  y_{i,l} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall l \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.46}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,\}, h \in \{1,\ldots,k\}$)
+\begin{itemize}
+  \item $x_{i,j,h} = \begin{cases}
+    1 &\text{se pianifico una lezione del corso}i\text{ nell'aula }j\text{ nella fascia }h\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n\sum_{j=1}^m\sum_{h \in D} x_{i,j,h}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{h=1}^k x_{i,j,h} &\leq 1 &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}\\
+  \sum_{i=1}^n x_{i,j,h} &\leq 1 &\forall j \in \{1,\ldots,m\}, h \in \{1,\ldots,k\}\\
+  \sum_{j=1}^m x_{i,j,h} &\leq 1 &\forall i \in \{1,\ldots,n\}, h \in \{1,\ldots,k\}\\
+  \sum_{j=1}^m \sum_{h = 1}^k x_{i,j,h} &= f_i &\forall i \in \{1,\ldots,n\}\\
+  x_{i,j,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}, i \in \{1,\ldots,k\}
+\end{alignat}
+
+\paragraph{Prametri (preprocess, variante)} ($i \in \{1,\ldots\,n\}, a \in \{1,\ldots,s\}$)
+\begin{itemize}
+  \item $y_{i,a} = \begin{cases}
+    1 &\text{se }d_i = a\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Vincoli (variante)}
+\begin{alignat}{2}
+  \setcounter{equation}{5}
+  \sum_{j=1}^m x_{i,j,h} y_{i,a} &\leq 1 &\forall i \in \{1,\ldots,i\}, h \in \{1,\ldots, k\}, a \in \{1,\ldots,s\}\\
+  y_{i,a} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, \forall a \in \{1,\ldots,s\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.47}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $y_i = \begin{cases}
+    1 &\text{se posso acquistare energia da }i\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $x_i = \begin{cases}
+    1 &\text{quantita' di kWh che acquisto da }i\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{i=1}^n y_i m_i + x_i p_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_i &\leq y_i c &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_i &= c &\\
+  \frac{\sum_{i=1}^n y_i m_i}{\sum_{i=1}^n y_i m_i + x_i p_i} &\leq 0.2 &\\
+  y_i &\in \{0,1\}, x_i \in \mathbb{R} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.48}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se carico il pacco }i\text{ sul camion }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_j = \begin{cases}
+    1 &\text{se uso il camion }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{j=1}^n y_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  x_{i,j} &\leq y_j &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,n\}\\
+  y_j &\leq \sum_{i=1}^n x_{i,j} &\forall j \in \{1,\ldots,n\}\\
+  \sum_{j=1}^n x_{i,j} &= 1 &\forall i \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} a_i &\leq c &\forall j \in \{1,\ldots,n\} \\
+  \sum_{i=1}^n x_{i,j} b_i &\leq m &\forall j \in \{1,\ldots,n\} \\
+  x_{i,j}, y_j &\in \{0,1\}, \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.49}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,10\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se assegno la commessa }i\text{ alla macchina }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_i = \begin{cases}
+    1 &\text{consegno la commessa }i\text{ entro la fine del mese}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n y_i g_i - (1-y_i)p_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  y_i &= \sum_{j=1}^n x_{i,j} &\forall i \in \{1,\ldots,n\}\\
+  \sum_{j=1}^10 x_{i,j} &\leq 1 &\forall i \in \{1,\ldots,n\}\\
+  \sum_{i=1}^n x_{i,j} t_{i,j} &\leq 31 &\forall j \in \{1,\ldots,10\}\\
+  x_{i,j}, y_i &\in \{0,1\}, \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,10\}
+\end{alignat}
+
+\paragraph{Prametri (preprocess, variante)} ($h \in \{1,\ldots,k\}$)
+\begin{itemize}
+  \item $F_h = \{ i \in \{1,\ldots,n\} \mid f_i = h \}$
+\end{itemize}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i \in F_h} y_i &\geq \frac{|F_h|}{2} &\forall h \in \{1,\ldots,k\}\\
+  o_{i,h} \in \{0,1\}, n_h &\in \mathbb{N} \quad &\forall i \in \{1,\ldots,n\}, h \in \{1,\ldots,k\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.50}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,30\}$)
+\begin{itemize}
+  \item $k_i = \begin{cases}
+      1 &\text{se il dipendente }i\text{ svolge alcuna ora di straordinario} \\
+      0 &\text{altrimenti}
+    \end{cases}$
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se il dipendente }i\text{ lavora un turno ordinario nel giorno }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $y_{i,j} = \begin{cases}
+    1 &\text{se il dipendente }i\text{ lavora un turno straordinario nel giorno }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+  \item $h_{i,j} = \begin{cases}
+    1 &\text{il dipendente }i\text{ svolge il turno di mattina nel giorno }j\\
+    0 &\text{il dipendente }i\text{ svolge il turno di pomeriggio nel giorno }j\\
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^{30} x_{i,j} + 2y_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^{30} x_{i,j} &\leq o_i &\forall i \in \{1,\ldots,n\}\\
+  \sum_{j=1}^{30} y_{i,j} &\leq s_i &\forall i \in \{1,\ldots,n\}\\
+  x_{i,j} + y_{i,j} &\leq 1 &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,30\}\\
+  \sum_{i=1}^n h_{i,j}(x_{i,j} + y_{i,j}) &\geq k &\forall j \in \{1,\ldots,30\}\\
+  \sum_{i=1}^n (1-h_{i,j})(x_{i,j} + y_{i,j}) &\geq k &\forall j \in \{1,\ldots,30\}\\
+  \sum_{j=1}^{30} x_{i,j} &\geq k_i o_i &\forall i \in \{1,\ldots,n\}\\
+  \sum_{j=1}^{30} x_{i,j} &\leq (1-k_i) (o_i-1) &\forall i \in \{1,\ldots,n\}\\
+  y_{i,j} &\leq k_{i} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,30\}\\
+  k_i, x_{i,j}, y_{i,j}, h_{i,j} &\in \{0,1\}, \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,30\}
+\end{alignat}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^{30} x_{i,j}r_i + y_{i,j}t_i
+\end{align*}
+
+\pagebreak
+\section{Esercizio 1.51}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_i = \text{numero di GB che salvo nel datacenter }i$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n x_i p_i
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n x_i &= 1000k &\\
+  x_i &\leq c_i &\forall i \in \{1,\ldots,n\}\\
+  x_i &\geq \frac{90}{100} c_i &\forall i \in \{1,\ldots,n\}\\
+  x_i &\in \mathbb{N} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\paragraph{Variabili (variante)} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $y_i = \begin{cases}
+    1 &\text{se uso il datacenter }i\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{i=1}^n x_i p_i + y_i s_i
+\end{align*}
+
+\paragraph{Vincoli (variante)}
+\begin{alignat}{2}
+  x_i &\leq y_i c_i\\
+  x_i &\geq y_i\\
+  y_i &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.52}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $c_{i,l} = \begin{cases}
+      1 & \text{se }l = S_i \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se alloco il collaboratore }i\text{ al progetto }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} p_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{i=1}^n x_{i,j} c_{i,l} &\geq 1 &\forall j \in \{1,\ldots,m\}, l \in R_j\\
+  \text{(semi) assegnamento} &\text{ non specificato}&\\
+  c_{i,j}, x_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\paragraph{Variabili (variante)} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $y_i = \begin{cases}
+    1 &\text{se il collaboratore }i\text{ \`e assegnato ad almeno un progetto}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{i=1}^n y_i
+\end{align*}
+
+\paragraph{Vincoli (variante)}
+\begin{alignat}{2}
+  x_{i,j} &\leq y_i &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}\\
+  \sum_{j=1}^m x_{i,j} &\geq y_i &\forall i \in \{1,\ldots,n\}\\
+  y_i &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.53}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $c_{i,j} = \begin{cases}
+      1 & \text{se }i \in S_j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_j = \begin{cases}
+    1 &\text{se vendo il blocco di macchine }S_j\text{ all'acquirente }j\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \max \quad \sum_{j=1}^m x_j p_j
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_j c_{i,j} &\leq 1 &\forall i \in \{1,\ldots,n\}\\
+  c_{i,j}, x_j &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.54}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}$)
+\begin{itemize}
+  \item $x_i = \begin{cases}
+    1 &\text{se sposto il dipendente }i\text{-esimo}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^n x_i (1-x_j) t_{i,j} + x_j (1-x_i) t_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  &\sum_{i=1}^n x_i \leq k \qquad &\sum_{j=1}^n (1-x_{j}) \leq k \\
+  x_i &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\pagebreak
+\section{Esercizio 1.55}
+
+\paragraph{Prametri (preprocess)} ($i \in \{1,\ldots\,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $w_{i,j} = \begin{cases}
+      1 & \text{se }s_i \neq j \\
+      0 & \text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Variabili} ($i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}$)
+\begin{itemize}
+  \item $x_{i,j} = \begin{cases}
+    1 &\text{se alloco il libro }i\text{ nello scaffale j}\\
+    0 &\text{altrimenti}
+  \end{cases}$
+\end{itemize}
+
+\paragraph{Funzione obbiettivo}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} w_{i,j}
+\end{align*}
+
+\paragraph{Vincoli}
+\begin{alignat}{2}
+  \sum_{j=1}^m x_{i,j} &= 1 &\forall i \in \{1,\ldots,n\}\\
+  \sum_{i=1}^n x_{i,j} &\leq k_j &\forall j \in \{1,\ldots,m\}\\
+  w_{i,j}, x_{i,j} &\in \{0,1\} \quad &\forall i \in \{1,\ldots,n\}
+\end{alignat}
+
+\paragraph{Funzione obbiettivo (variante)}
+\begin{align*}
+  \min \quad \sum_{i=1}^n \sum_{j=1}^m x_{i,j} \delta_{s_i,j}
+\end{align*}
+
+\end{document}
