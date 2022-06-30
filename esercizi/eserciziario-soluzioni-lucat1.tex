@@ -12,7 +12,7 @@
 
 \title{Programmazione Lineare}
 \author{Luca Tagliavini
-  \thanks{Correzioni: Stefano Volpe, Matteo Manuelli, Andreea Scrob, Paolo Ceroni}
+  \thanks{Correzioni: Andreea Scrob, Federica Grisendi, Stefano Volpe, Matteo Manuelli, Paolo Ceroni}
 }
 
 \setcounter{secnumdepth}{0}
@@ -47,7 +47,9 @@
 
 \paragraph{Vincoli}
 \begin{alignat}{1}
-  \sum_{i=1}^n x_i \sum_{j=1}^m y_j &= k \\
+  \sum_{i=1}^n x_i + \sum_{j=1}^m y_j &= k \\
+  \sum_{j=1}^m y_j &\geq q \\
+  \sum_{j=1}^m (1-y_j) &\geq q \\
   x_i, y_j \in \{0,1\} \qquad &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
 \end{alignat}
 
@@ -231,10 +233,9 @@
 
 \paragraph{Vincoli}
 \begin{alignat}{2}
-  x_{i,j} \leq y_j &\geq 1 &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
+  y_j \geq x_{i,j} &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
   \sum_{i=1}^n x_{i,j} &\geq y_j &\forall j \in \{1,\ldots,m\} \\
   \sum_{j=1}^m x_{i,j} &=1  &\forall i \in \{1,\ldots,n\} \\
-  \sum_{i=1}^n x_{i,j} &=1  &\forall j \in \{1,\ldots,m\} \\
   &&\sum_{j=1}^m y_j d_j + \sum_{i=1}^n\sum_{j=1}^m x_{i,j} c_{i,j} s_i \leq 650 \cdot 1000 \\
   x_{i,j} &\in \{0,1\}, y_j \in \{0,1\} &\forall i \in \{1,\ldots,n\}, j \in \{1,\ldots,m\}
 \end{alignat}
@@ -261,7 +262,7 @@
 
 \paragraph{Vincoli}
 \begin{alignat}{2}
-  x_{i,j} \leq y_j &\geq 1 &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
+  y_j \geq x_{i,j} &\forall i \in \{1,\ldots,n\}, \forall j \in \{1,\ldots,n\} \\
   \sum_{i=1}^n x_{i,j} &\geq y_j &\forall j \in \{1,\ldots,m\} \\
   \sum_{j=1}^m x_{i,j} &=1  &\forall i \in \{1,\ldots,n\} \\
   \sum_{i=1}^n x_{i,j} p_i &\leq c_j  &\forall j \in \{1,\ldots,m\} \\
