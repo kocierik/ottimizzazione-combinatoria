@@ -15,7 +15,7 @@
 
 ### Obiettivo
 
-$$ \max \sum\_{l=1}^{n} x_l $$
+$$ \max \sum_{l=1}^{n} x_l $$
 
 ### Vincoli
 
@@ -37,7 +37,7 @@ $$ \forall k \in \{1, \dots, m\}\quad x_{i_k} + x_{j_k} \leq 1 $$
 
 ### Obiettivo
 
-$$ \min \sum\_{k=1}^{n} x_k $$
+$$ \min \sum_{k=1}^{n} x_k $$
 
 ### Vincoli
 
