@@ -15,13 +15,13 @@
 
 ### Obiettivo
 
-$$ \max \sum_{l=1}^{n} x_l $$
+$$ \max \sum\_{l=1}^{n} x_l $$
 
 ### Vincoli
 
-$$ \forall l \in \{1, \dots n\}. 0 \leq x_l \leq 1 $$
+$$ \forall l \in \{1, \dots n\}\ 0 \leq x_l \leq 1 $$
 
-$$ \forall k \in \{1, \dots, m\}. x_{i_k} + x_{j_k} \leq 1 $$
+$$ \forall k \in \{1, \dots, m\}\ x*{i_k} + x*{j_k} \leq 1 $$
 
 ## Esercizio 4
 
@@ -37,10 +37,10 @@ $$ \forall k \in \{1, \dots, m\}. x_{i_k} + x_{j_k} \leq 1 $$
 
 ### Obiettivo
 
-$$ \min \sum_{k=1}^{n} x_k $$
+$$ \min \sum\_{k=1}^{n} x_k $$
 
 ### Vincoli
 
-$$ \forall k \in \{1, \dots n\}. 0 \leq x_k \leq 1 $$
+$$ \forall k \in \{1, \dots n\}\ 0 \leq x_k \leq 1 $$
 
 $$ \forall (i, j) \in A. x_i + x_j \geq 1 $$
