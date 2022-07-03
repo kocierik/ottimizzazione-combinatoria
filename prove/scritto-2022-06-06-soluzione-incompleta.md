@@ -19,9 +19,9 @@ $$ \max \sum\_{l=1}^{n} x_l $$
 
 ### Vincoli
 
-$$ \forall l \in \{1, \dots n\}\ 0 \leq x_l \leq 1 $$
+$$ \forall l \in \{ 1, \dots n \} \quad 0 \leq x_l \leq 1 $$
 
-$$ \forall k \in \{1, \dots, m\}\ x*{i_k} + x*{j_k} \leq 1 $$
+$$ \forall k \in \{1, \dots, m\}\quad x_{i_k} + x_{j_k} \leq 1 $$
 
 ## Esercizio 4
 
@@ -41,6 +41,6 @@ $$ \min \sum\_{k=1}^{n} x_k $$
 
 ### Vincoli
 
-$$ \forall k \in \{1, \dots n\}\ 0 \leq x_k \leq 1 $$
+$$ \forall k \in \{1, \dots n\}\quad 0 \leq x_k \leq 1 $$
 
 $$ \forall (i, j) \in A. x_i + x_j \geq 1 $$
