@@ -43,4 +43,4 @@ $$ \min \sum\_{k=1}^{n} x_k $$
 
 $$ \forall k \in \{1, \dots n\}\quad 0 \leq x_k \leq 1 $$
 
-$$ \forall (i, j) \in A. x_i + x_j \geq 1 $$
+$$ \forall (i, j) \in A \quad x_i + x_j \geq 1 $$
