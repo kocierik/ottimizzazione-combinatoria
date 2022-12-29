@@ -1,3 +1,5 @@
+//AUTORE: Libera Longo
+//Data: 29 dicembre 2022
 //programma che scrive in automatico quello che dovremmo fare noi per risolvere
 //l'algoritmo del simplesso
 //per ovvi motivi non ragiona in modo grafico quindi è da verificare...
